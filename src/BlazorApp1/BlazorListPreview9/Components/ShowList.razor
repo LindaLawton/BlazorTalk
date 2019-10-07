@@ -1,0 +1,18 @@
+﻿@using System;
+<Heading HeadingText="@HeadingText" />
+<ListItems Items="@ListItems" />
+<SubmitButton Item="@Item" ButtonText="add item" OnClick="@AddItem" />
+
+@code {
+    [Parameter]
+    public string HeadingText { get; set; } = "MyList";
+
+    public List<string> ListItems { get; set; } = new List<string> { };
+
+    public string Item { get; set; }
+
+    private void AddItem(string item)
+    {
+        ListItems.Add(item);
+    }
+}

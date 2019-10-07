@@ -1,0 +1,42 @@
+﻿@page "/FormsValidation"
+@using BlazorListPreview9.Model;
+
+<EditForm EditContext="@editContext" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <p>
+        <label for="name">Name: </label>
+        <InputText id="name" @bind-Value="@itemModel.Name" />
+    </p>
+
+    <p>
+        <label for="age">Age: </label>
+        <InputNumber id="age" @bind-Value="@itemModel.Age" />
+    </p>
+
+    <p>
+        <label for="valid">Consent: </label>
+        <InputCheckbox id="valid" @bind-Value="itemModel.HasConsented" />
+    </p>
+    <button type="submit">Submit</button>
+</EditForm>
+
+@code {
+    private EditContext editContext;
+
+    private ItemModel itemModel = new ItemModel();
+
+    protected override void OnInitialized()
+    {
+        this.editContext = new EditContext(itemModel);
+    }
+    private void HandleValidSubmit()
+    {
+        Console.WriteLine("OnValidSubmit");
+    }
+}
+
+
+
+

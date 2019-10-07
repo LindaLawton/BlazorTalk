@@ -1,0 +1,19 @@
+﻿<input type="text" @bind="@Item" />
+<button class="btn btn-primary" @onclick="@OnClickInternal">@ButtonText</button>
+
+@code {
+    [Parameter]
+    public string ButtonText { get; set; } = "Submit";
+    [Parameter]
+    public string Item { get; set; }
+    [Parameter]
+    public EventCallback<string> OnClick { get; set; }
+    async Task OnClickInternal()
+    {
+        // verify that the delegate associated with this event dispatcher is non-null
+        if (OnClick.HasDelegate)
+        {
+            await OnClick.InvokeAsync(Item);
+        }
+    }
+}
